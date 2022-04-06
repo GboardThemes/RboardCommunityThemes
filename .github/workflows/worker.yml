@@ -31,6 +31,7 @@ jobs:
           git checkout -b deployThemes
           git add deploy
           git commit -m "Add new Themes"
+          git push -u origin deployThemes
 
       - name: Create Pull Request
         continue-on-error: true
