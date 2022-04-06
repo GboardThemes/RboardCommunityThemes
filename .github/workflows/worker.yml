@@ -33,6 +33,10 @@ jobs:
           git commit -m "Add new Themes"
           git push -u origin deployThemes
 
-      - name: Create Pull Request
-        continue-on-error: true
-        uses: peter-evans/create-pull-request@v4
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: 'main'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_label: 'Add new Themes'
+          pr_title: 'Automatic Deploy script'
