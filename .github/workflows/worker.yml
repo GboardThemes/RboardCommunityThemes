@@ -3,7 +3,7 @@ name: Telegram Worker
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 * * * *'
+    - cron: '0,30 * * * *'
 
 jobs:
   telegram_worker:
@@ -20,5 +20,16 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-      - name: Check api
+      - name: Fetch Theme packs
         run: node fetchGroup.js ${{ secrets.TELEGRAM_TOKEN }}
+
+      - name: Create commit
+        run: |
+          git config user.name '${{ github.actor }}'
+          git config user.email '${{ github.actor }}@users.noreply.github.com'
+          git checkout -b deployThemes
+          git add deploy
+          git commit -m "Add new Themes"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4

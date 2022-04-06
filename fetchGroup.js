@@ -33,8 +33,8 @@ const run = async () => {
         const messages = json.result.filter(update =>
             update.message?.chat?.id === chatId &&
             update.message?.document?.file_name?.endsWith('.pack') &&
-            update.message?.caption === '#test' &&
-            update.message.date > now - (1000 * 60 * 30)
+            update.message?.caption === '#request' &&
+            update.message.date > now - (60 * 30)
         ).map(update => update.message)
         for (const message of messages) {
             const getFile = await fetch(`https://api.telegram.org/bot${token}/getFile`, {
