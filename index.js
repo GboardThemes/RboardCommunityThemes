@@ -8,7 +8,7 @@ import fs from 'fs'
 import gitRemoteOriginUrl from 'remote-origin-url'
 import parseGithubUrl from 'parse-github-url'
 import gitBranch from 'git-branch'
-import {default as gitLog} from 'gitlog'
+import gitLog from 'gitlog'
 
 const packPath = process.argv[2]
 
