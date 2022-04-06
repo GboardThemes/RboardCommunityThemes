@@ -72,7 +72,7 @@ async function run() {
             meta.themes = zip.getEntries().filter(entry => entry.name.endsWith(".zip")).map(entry => entry.name.replace(".zip", ""))
             meta.size = fs.statSync(path.join(packPath, pack)).size
             await new Promise((res) => {
-                gitLog({
+                gitLog.default({
                     repo: process.cwd(),
                     file: path.join(packPath, pack),
                     fields: ["hash", "authorName", "authorDate"]
