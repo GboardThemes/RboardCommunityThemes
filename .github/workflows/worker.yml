@@ -7,6 +7,7 @@ on:
 
 jobs:
   telegram_worker:
+    name: Telegram Worker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,10 +34,12 @@ jobs:
           git commit -m "Add new Themes"
           git push -u origin deployThemes
 
-      - name: pull-request
+      - name: Create Pull-request
         uses: repo-sync/pull-request@v2
         with:
+          source_branch: 'deployThemes'
           destination_branch: 'main'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_label: 'Add new Themes'
+          pr_label: 'deployThemes'
+          pr_body: 'Add new Themes'
           pr_title: 'Automatic Deploy script'
