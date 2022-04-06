@@ -30,6 +30,14 @@ jobs:
       - name: Deploy new Themes
         run: node index.js deploy
 
+      - name: Create commit
+        continue-on-error: true
+        run: |
+          git config user.name '${{ github.actor }}'
+          git config user.email '${{ github.actor }}@users.noreply.github.com'
+          git add .
+          git commit -m "Parse themes"
+
       - name: Parse list
         run: node index.js packs
 
