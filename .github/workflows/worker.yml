@@ -10,13 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check api
-        run: |
-          curl -X POST \
-            https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/getUpdates \
-            -H 'cache-control: no-cache' \
-            -H 'content-type: application/json' \
-            -H 'postman-token: 05bb8733-9f0a-3b54-cc44-ff48b6276eb6' \
-            -d '{
-          	"allowed_updates": ["message"],
-          	"offset": -1
-          }'
+        run: node fetchGroup.js ${{ secrets.TELEGRAM_TOKEN }}
