@@ -46,13 +46,17 @@ const run = async () => {
             update.message.date > now - (60 * 30)
         ).map(update => update.message)
         for (const message of messages) {
-            if (message.document && message.document?.file_name?.endsWith('.pack')) {
+            if (
+                (message.document && message.document?.file_name?.endsWith('.pack')) ||
+                (message.reply_to_message.document && message.reply_to_message.document?.file_name?.endsWith('.pack'))
+            ) {
+                const document = message.document ?? message.reply_to_message.document
                 const getFile = await fetch(`https://api.telegram.org/bot${token}/getFile`, {
                     method: 'post', headers: {
                         'content-type': 'application/json'
-                    }, body: JSON.stringify({file_id: message.document.file_id})
+                    }, body: JSON.stringify({file_id: document.file_id})
                 }).then(body => body.json())
-                if (getFile.ok) await downloadFile(`https://api.telegram.org/file/bot${token}/${getFile.result.file_path}`, path.join('deploy', message.document.file_name))
+                if (getFile.ok) await downloadFile(`https://api.telegram.org/file/bot${token}/${getFile.result.file_path}`, path.join('deploy', document.file_name))
             } else if (message.text === hashtag && message.reply_to_message) {
                 if (!message.document && (message.reply_to_message.text.startsWith('https://creator.dertyp7214.de') || message.reply_to_message.text.startsWith('https://rboard.dertyp7214.de'))) {
                     const url = new URL(message.reply_to_message.text)
