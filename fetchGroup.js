@@ -32,7 +32,7 @@ const run = async () => {
         method: 'post', headers: {
             'content-type': 'application/json'
         }, body: JSON.stringify({
-            allowed_updates: ["message"], offset: -1
+            allowed_updates: ["message"]
         })
     }).then(body => body.json())
 
