@@ -30,7 +30,7 @@ jobs:
           git config user.name '${{ github.actor }}'
           git config user.email '${{ github.actor }}@users.noreply.github.com'
           git checkout -b deployThemes
-          git pull
+          git pull --all
           git add deploy
           git commit -m "Add new Themes"
           git push -u origin deployThemes
