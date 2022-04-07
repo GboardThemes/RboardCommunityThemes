@@ -51,6 +51,9 @@ const run = async () => {
                 (message.reply_to_message.document && message.reply_to_message.document?.file_name?.endsWith('.pack'))
             ) {
                 const document = message.document ?? message.reply_to_message.document
+
+                console.log('Fetching:', document.file_name)
+
                 const getFile = await fetch(`https://api.telegram.org/bot${token}/getFile`, {
                     method: 'post', headers: {
                         'content-type': 'application/json'
@@ -61,6 +64,8 @@ const run = async () => {
                 if (!message.document && (message.reply_to_message.text.startsWith('https://creator.dertyp7214.de') || message.reply_to_message.text.startsWith('https://rboard.dertyp7214.de'))) {
                     const url = new URL(message.reply_to_message.text)
                     const imageUrl = `https://creator.dertyp7214.de/preview${url.search}`
+
+                    console.log(message.reply_to_message.text)
 
                     const {
                         mainBg, keyBg, keyColor, secondKeyBg, accentBg, themeName, author
