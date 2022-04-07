@@ -21,11 +21,17 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-      - name: Setup git
+      - name: Setup git and fetch
+        continue-on-error: true
         run: |
           git config user.name '${{ github.actor }}'
           git config user.email '${{ github.actor }}@users.noreply.github.com'
           git config pull.rebase true
+          git fetch origin deployThemes
+
+      - name: Pull branch
+        continue-on-error: true
+        run: |
           git checkout -b deployThemes
           git pull origin deployThemes
 
