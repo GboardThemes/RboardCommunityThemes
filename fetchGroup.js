@@ -71,7 +71,7 @@ const run = async () => {
                     if (mainBg && keyBg && keyColor && secondKeyBg && accentBg) {
                         const escapedThemeName = (themeName ?? 'DerTyp7124').replace(new RegExp(' ', 'g'), '_')
 
-                        const image = Buffer.from(await fetch(imageUrl).then(body => body.text())).toString('base64')
+                        const image = Buffer.from(await fetch(imageUrl).then(body => body.arrayBuffer())).toString('base64')
 
                         const themeZip = JSZip()
 
