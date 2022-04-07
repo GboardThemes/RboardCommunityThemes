@@ -1,5 +1,16 @@
 [
   {
+    "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/@MrWarden9CZ.pack",
+    "author": "@MrWarden9CZ",
+    "tags": [],
+    "themes": [
+      "SamsungLikeDarkColors"
+    ],
+    "size": 54143,
+    "date": 1649361185000,
+    "name": "Themes by @MrWarden9CZ"
+  },
+  {
     "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/DerTyp7214.pack",
     "author": "DerTyp7214",
     "tags": [],
@@ -24,16 +35,5 @@
     "size": 188279,
     "date": 1649360963000,
     "name": "Themes by SAMURAI-27"
-  },
-  {
-    "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/_@MrWarden9CZ.pack",
-    "author": "_@MrWarden9CZ",
-    "tags": [],
-    "themes": [
-      "SamsungLikeDarkColors"
-    ],
-    "size": 54144,
-    "date": 1649360963000,
-    "name": "Themes by _@MrWarden9CZ"
   }
 ]
