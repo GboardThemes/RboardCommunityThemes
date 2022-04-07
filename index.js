@@ -53,6 +53,7 @@ async function run() {
                 packZip.addFile('pack.meta', `name=${meta.name}\nauthor=${meta.author}`)
                 await packZip.writeZipPromise(newPackPath)
             }
+            console.log('Deployed:', meta.name)
             fs.unlinkSync(zipPath)
             rimraf.sync('tmp')
         }
