@@ -21,15 +21,16 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
-      - name: Fetch Theme packs
-        run: node fetchGroup.js ${{ secrets.TELEGRAM_TOKEN }}
-
       - name: Setup git
         run: |
           git config user.name '${{ github.actor }}'
           git config user.email '${{ github.actor }}@users.noreply.github.com'
+          git config pull.rebase true
           git checkout -b deployThemes
           git pull origin deployThemes
+
+      - name: Fetch Theme packs
+        run: node fetchGroup.js ${{ secrets.TELEGRAM_TOKEN }}
 
       - name: Create commit
         continue-on-error: true
