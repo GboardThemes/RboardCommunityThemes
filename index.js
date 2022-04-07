@@ -31,7 +31,7 @@ async function run() {
                     }
                 })
             }
-            meta.author = meta.author.replace(new RegExp(' ', 'g'), '_')
+            meta.author = meta.author.trim().replace(new RegExp(' ', 'g'), '_')
             const newPackPath = path.join('packs', `${meta.author}.pack`)
             if (fs.existsSync('tmp')) rimraf.sync('tmp')
             fs.mkdirSync('tmp')
