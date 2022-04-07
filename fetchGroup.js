@@ -46,6 +46,7 @@ const run = async () => {
             update.message.date > now - (60 * 30)
         ).map(update => update.message)
         for (const message of messages) {
+            console.log('\n', 'Checking:', message, '\n')
             if (
                 (message.document && message.document?.file_name?.endsWith('.pack')) ||
                 (message.reply_to_message.document && message.reply_to_message.document?.file_name?.endsWith('.pack'))
