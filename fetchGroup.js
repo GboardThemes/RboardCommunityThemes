@@ -1,12 +1,12 @@
+import {fileFromPath} from 'formdata-node/file-from-path'
+import {FormData} from 'formdata-node'
 import fetch from 'node-fetch'
 import JSZip from 'jszip'
 import path from 'path'
 import fs from 'fs'
 
 import {
-    metadata,
-    styleSheetMd,
-    styleSheetMdBorder
+    metadata, styleSheetMd, styleSheetMdBorder
 } from './variables.js'
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
@@ -29,13 +29,10 @@ const downloadFile = async (url, path, options) => {
 const run = async () => {
     const now = Date.now() / 1000
     const json = await fetch(`https://api.telegram.org/bot${token}/getUpdates`, {
-        method: 'post',
-        headers: {
+        method: 'post', headers: {
             'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            allowed_updates: ["message"],
-            offset: -1
+        }, body: JSON.stringify({
+            allowed_updates: ["message"], offset: -1
         })
     }).then(body => body.json())
 
@@ -51,32 +48,18 @@ const run = async () => {
         for (const message of messages) {
             if (message.document && message.document?.file_name?.endsWith('.pack')) {
                 const getFile = await fetch(`https://api.telegram.org/bot${token}/getFile`, {
-                    method: 'post',
-                    headers: {
+                    method: 'post', headers: {
                         'content-type': 'application/json'
-                    },
-                    body: JSON.stringify({file_id: message.document.file_id})
+                    }, body: JSON.stringify({file_id: message.document.file_id})
                 }).then(body => body.json())
-                if (getFile.ok) await downloadFile(
-                    `https://api.telegram.org/file/bot${token}/${getFile.result.file_path}`,
-                    path.join('deploy', message.document.file_name)
-                )
+                if (getFile.ok) await downloadFile(`https://api.telegram.org/file/bot${token}/${getFile.result.file_path}`, path.join('deploy', message.document.file_name))
             } else if (message.text === hashtag && message.reply_to_message) {
-                if (!message.document && (
-                    message.reply_to_message.text.startsWith('https://creator.dertyp7214.de') ||
-                    message.reply_to_message.text.startsWith('https://rboard.dertyp7214.de')
-                )) {
+                if (!message.document && (message.reply_to_message.text.startsWith('https://creator.dertyp7214.de') || message.reply_to_message.text.startsWith('https://rboard.dertyp7214.de'))) {
                     const url = new URL(message.reply_to_message.text)
                     const imageUrl = `https://creator.dertyp7214.de/preview${url.search}`
 
                     const {
-                        mainBg,
-                        keyBg,
-                        keyColor,
-                        secondKeyBg,
-                        accentBg,
-                        themeName,
-                        author
+                        mainBg, keyBg, keyColor, secondKeyBg, accentBg, themeName, author
                     } = [...url.searchParams.entries()].reduce((map, obj) => {
                         map[obj[0]] = obj[1]
                         return map
@@ -92,16 +75,7 @@ const run = async () => {
 
                         const themeZip = JSZip()
 
-                        const variables = [
-                            `@def web_color_bg #${mainBg};`,
-                            `@def web_color_label #${keyColor};`,
-                            `@def web_color_accent #${accentBg};`,
-                            `@def web_color_accent_pressed ${accentBgPressed};`,
-                            `@def web_color_key_bg #${keyBg};`,
-                            `@def web_color_key_bg_pressed #${secondKeyBg};`,
-                            `@def web_color_secondary_key_bg #${secondKeyBg};`,
-                            `@def web_color_secondary_key_bg_pressed ${secondKeyBgPressed};`
-                        ]
+                        const variables = [`@def web_color_bg #${mainBg};`, `@def web_color_label #${keyColor};`, `@def web_color_accent #${accentBg};`, `@def web_color_accent_pressed ${accentBgPressed};`, `@def web_color_key_bg #${keyBg};`, `@def web_color_key_bg_pressed #${secondKeyBg};`, `@def web_color_secondary_key_bg #${secondKeyBg};`, `@def web_color_secondary_key_bg_pressed ${secondKeyBgPressed};`]
 
                         themeZip.file('metadata.json', JSON.stringify(metadata, null, 2))
                         themeZip.file('style_sheet_md2.css', styleSheetMd)
@@ -114,15 +88,29 @@ const run = async () => {
                         packZip.file(`${escapedThemeName}.zip`, await themeZip.generateAsync({type: 'base64'}), {base64: true})
                         packZip.file(escapedThemeName, image, {base64: true})
 
+                        const packPath = path.join('deploy', `${themeName}.pack`)
+
                         await new Promise(res => packZip.generateNodeStream({
-                            type: 'nodebuffer',
-                            streamFiles: true
-                        }).pipe(fs.createWriteStream(path.join('deploy', `${themeName}.pack`))).on('finish', res))
+                            type: 'nodebuffer', streamFiles: true
+                        }).pipe(fs.createWriteStream(packPath)).on('finish', res))
+
+                        await replyWithTheme(packPath, message)
                     }
                 }
             }
         }
     }
+}
+
+const replyWithTheme = async (file, message) => {
+    const body = new FormData()
+    body.set('chat_id', message.chat.id)
+    body.set('document', await fileFromPath(file))
+    body.set('reply_to_message_id', parseInt(message.message_id))
+
+    await fetch(`https://api.telegram.org/bot${token}/sendDocument`, {
+        method: 'post', body
+    }).catch(console.log)
 }
 
 const shadeColor = (color, percent) => {

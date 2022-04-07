@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "adm-zip": "^0.5.6",
+    "formdata-node": "^4.3.2",
     "git-branch": "^2.0.1",
     "gitlog": "^4.0.4",
     "jszip": "^3.9.1",
