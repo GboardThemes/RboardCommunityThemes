@@ -1,17 +1,5 @@
 [
   {
-    "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/@MrWarden9CZ.pack",
-    "author": "@MrWarden9CZ",
-    "tags": [],
-    "themes": [
-      "SamsungLikeLightColors",
-      "SamsungLikeDarkColors"
-    ],
-    "size": 105436,
-    "date": 1649361693000,
-    "name": "Themes by @MrWarden9CZ"
-  },
-  {
     "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/DerTyp7214.pack",
     "author": "DerTyp7214",
     "tags": [],
@@ -25,25 +13,17 @@
     "name": "Themes by DerTyp7214"
   },
   {
-    "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/MrLeanWarden9CZ.pack",
-    "author": "MrLeanWarden9CZ",
-    "tags": [],
-    "themes": [
-      "Snowy_Mountain_Dark"
-    ],
-    "size": 32478,
-    "date": 1649991427000,
-    "name": "Themes by MrLeanWarden9CZ"
-  },
-  {
     "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/MrWarden9CZ.pack",
     "author": "MrWarden9CZ",
     "tags": [],
     "themes": [
-      "Snowy_Mountain_Light"
+      "Snowy_Mountain_Light",
+      "Snowy_Mountain_Dark",
+      "SamsungLikeLightColors",
+      "SamsungLikeDarkColors"
     ],
-    "size": 36136,
-    "date": 1649991427000,
+    "size": 173737,
+    "date": 1649991656000,
     "name": "Themes by MrWarden9CZ"
   },
   {
