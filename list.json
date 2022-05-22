@@ -44,12 +44,18 @@
   {
     "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/YungCat.pack",
     "author": "YungCat",
-    "tags": [],
+    "tags": [
+      "Mine Shaft",
+      "Persian Rose",
+      "Brilliant Rose",
+      "Santas Gray",
+      "Martinique"
+    ],
     "themes": [
       "8008_Keyboard"
     ],
-    "size": 47689,
-    "date": 1653250670000,
-    "name": "Themes by YungCat"
+    "size": 69627,
+    "date": 1653250792000,
+    "name": "8008 Keyboard"
   }
 ]
