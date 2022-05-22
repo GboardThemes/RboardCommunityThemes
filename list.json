@@ -40,5 +40,16 @@
     "size": 188279,
     "date": 1649360963000,
     "name": "Themes by SAMURAI-27"
+  },
+  {
+    "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/YungCat.pack",
+    "author": "YungCat",
+    "tags": [],
+    "themes": [
+      "8008_Keyboard"
+    ],
+    "size": 47689,
+    "date": 1653250126000,
+    "name": "Themes by YungCat"
   }
 ]
