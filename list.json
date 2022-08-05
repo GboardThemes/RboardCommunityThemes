@@ -1,5 +1,31 @@
 [
   {
+    "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/@modulostk.pack",
+    "author": "@modulostk",
+    "tags": [],
+    "themes": [
+      "3Dark_VerdeLimon",
+      "3Dark_VerdeAgua",
+      "3Dark_Rosa",
+      "3Dark_Rojo",
+      "3Dark_Plata",
+      "3Dark_Piel",
+      "3Dark_Naranja",
+      "3Dark_Morado",
+      "3Dark_Lila",
+      "3Dark_Gris",
+      "3Dark_Celeste",
+      "3Dark_Carmine",
+      "3Dark_Blanco",
+      "3Dark_Black",
+      "3Dark_Azul",
+      "3Dark_Amarillo"
+    ],
+    "size": 1319450,
+    "date": 1659739777000,
+    "name": "Themes by @modulostk"
+  },
+  {
     "url": "https://github.com/GboardThemes/RboardCommunityThemes/raw/main/packs/DerTyp7214.pack",
     "author": "DerTyp7214",
     "tags": [],
