@@ -40,14 +40,12 @@ async function run() {
             if (fs.existsSync(newPackPath)) {
                 const packZip = new AdmZip(newPackPath)
                 for (const theme of packZip.getEntries())
-                    packZip.extractEntryTo(theme.entryName, 'tmp', false, true)
+                    packZip.extractEntryTo(theme.entryName, 'tmp', false, false)
                 const newZip = new AdmZip()
                 await newZip.addLocalFolderPromise('tmp')
                 await newZip.writeZipPromise(newPackPath)
             } else {
                 const packZip = new AdmZip()
-                for (const theme of packZip.getEntries().filter(entry => !entry.name.endsWith('.meta')))
-                    packZip.extractEntryTo(theme.entryName, 'tmp', false, true)
                 await packZip.addLocalFolderPromise('tmp')
                 meta.name = `Themes by ${meta.author}`
                 packZip.addFile('pack.meta', `name=${meta.name}\nauthor=${meta.author}`)
