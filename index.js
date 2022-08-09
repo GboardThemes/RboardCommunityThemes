@@ -40,7 +40,8 @@ async function run() {
             if (fs.existsSync(newPackPath)) {
                 const packZip = new AdmZip(newPackPath)
                 for (const theme of packZip.getEntries())
-                    packZip.extractEntryTo(theme.entryName, 'tmp', false, false)
+                    if (!fs.existsSync(path.join(newPackPath, 'tmp', theme.entryName)))
+                        packZip.extractEntryTo(theme.entryName, 'tmp', false, true)
                 const newZip = new AdmZip()
                 await newZip.addLocalFolderPromise('tmp')
                 await newZip.writeZipPromise(newPackPath)
