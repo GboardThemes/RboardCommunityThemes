@@ -49,7 +49,7 @@ async function run() {
                 const packZip = new AdmZip()
                 await packZip.addLocalFolderPromise('tmp')
                 meta.name = `Themes by ${meta.author}`
-                packZip.addFile('pack.meta', `name=${meta.name}\nauthor=${meta.author}`)
+                packZip.addFile('pack.meta', `name=${meta.name}\nauthor=${meta.author}${meta.tags ? `tags=${meta.tags.join(',')}` : ''}`)
                 await packZip.writeZipPromise(newPackPath)
             }
             console.log('Deployed:', meta.name)
@@ -76,7 +76,7 @@ async function run() {
                     repo: process.cwd(),
                     file: path.join(packPath, pack),
                     fields: ["hash", "authorName", "authorDate"]
-                }, (error, commits) => {
+                }, (_, commits) => {
                     const commit = commits[0]
                     if (commit) {
                         meta.date = new Date(commit.authorDate).getTime()
